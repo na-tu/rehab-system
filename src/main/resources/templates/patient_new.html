@@ -5,7 +5,7 @@
   <title>新規患者登録フォーム</title>
 </head>
 <body>
-<h1 th:text="${patient.id} != null ? '患者編集' : '患者登録'"></h1>
+<h1>新規患者登録</h1>
 <form th:action="${patient.id} != null ? @{/patients/{id}/update(id=${patient.id})} : @{/patients/register}"
       th:object="${patient}" method="post">
   <label>名前: <input type="text" th:field="*{name}" required /></label><br>

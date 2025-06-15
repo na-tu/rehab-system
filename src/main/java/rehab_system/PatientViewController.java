@@ -24,7 +24,7 @@ public class PatientViewController {
     @GetMapping("/new")
     public String showRegistrationForm(Model model) {
       model.addAttribute("patient", new Patient());
-      return "patient_form";
+      return "patient_new";
     }
 
     // 患者登録処理
@@ -53,7 +53,7 @@ public class PatientViewController {
   public String showEditForm(@PathVariable Long id, Model model) {
     Patient patient = patientService.getPatientForView(id);
     model.addAttribute("patient", patient);
-    return "patient_form";  // 登録フォームと共用もOK
+    return "patient_update";
   }
 
   // 更新処理
