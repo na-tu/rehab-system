@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="rehab_system.PatientRepository">
+
+  <!-- REST API用 -->
+  <select id="findAllPatients" resultType="map">
+    SELECT * FROM patients;
+  </select>
+
+  <select id="findPatientById" parameterType="long" resultType="map">
+    SELECT * FROM patients WHERE id = #{id};
+  </select>
+
+  <insert id="insertPatientFromMap" parameterType="map">
+    INSERT INTO patients (name, disease_name, start_date, end_date, notes, gender, age)
+    VALUES (#{name}, #{diseaseName}, #{startDate}, #{endDate}, #{notes}, #{gender}, #{age});
+  </insert>
+
+  <!-- View(Thymeleaf)用 -->
+  <insert id="insertPatient" parameterType="rehab_system.Patient">
+    INSERT INTO patients (name, disease_name, start_date, end_date, notes, gender, age)
+    VALUES (#{name}, #{diseaseName}, #{startDate}, #{endDate}, #{notes}, #{gender}, #{age});
+  </insert>
+
+  <select id="findAllPatientsForView" resultType="rehab_system.Patient">
+    SELECT id, name, disease_name AS diseaseName, start_date AS startDate,
+    end_date AS endDate, notes, gender, age
+    FROM patients;
+  </select>
+
+  <!-- 詳細取得 -->
+  <select id="findPatientByIdForView" parameterType="long" resultType="rehab_system.Patient">
+    SELECT id, name, disease_name AS diseaseName, start_date AS startDate,
+    end_date AS endDate, notes, gender, age
+    FROM patients
+    WHERE id = #{id};
+  </select>
+
+  <!-- 更新 -->
+  <update id="updatePatient" parameterType="rehab_system.Patient">
+    UPDATE patients
+    SET name = #{name},
+    disease_name = #{diseaseName},
+    start_date = #{startDate},
+    end_date = #{endDate},
+    notes = #{notes},
+    gender = #{gender},
+    age = #{age}
+    WHERE id = #{id};
+  </update>
+
+  <!-- 削除 -->
+  <delete id="deletePatient" parameterType="long">
+    DELETE FROM patients WHERE id = #{id};
+  </delete>
+
+
+</mapper>

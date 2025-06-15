@@ -1,4 +1,4 @@
-package com.rehabmanager.rehab_system;
+package rehab_system;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
