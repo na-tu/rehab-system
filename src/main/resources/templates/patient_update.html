@@ -6,26 +6,50 @@
 </head>
 <body>
 <h1>患者登録編集</h1>
+
+<!-- 患者編集フォーム -->
 <form th:action="${patient.id} != null ? @{/patients/{id}/update(id=${patient.id})} : @{/patients/register}"
       th:object="${patient}" method="post">
-  <label>名前: <input type="text" th:field="*{name}" required /></label><br>
-  <label>年齢: <input type="number" th:field="*{age}" min="0" /></label><br>
-  <label>性別:
-    <select th:field="*{gender}">
-      <option value="">選択してください</option>
-      <option value="男性">男性</option>
-      <option value="女性">女性</option>
-      <option value="その他">その他</option>
-    </select>
-  </label><br>
-  <label>疾患名: <input type="text" th:field="*{diseaseName}" /></label><br>
-  <label>開始日: <input type="date" th:field="*{startDate}" /></label><br>
-  <label>終了日: <input type="date" th:field="*{endDate}" /></label><br>
-  <label>備考: <textarea th:field="*{notes}" rows="4" cols="30"></textarea></label><br>
+  <div th:replace="~{fragments/patientForm :: patientFormFragment}"></div>
   <button type="submit">登録</button>
 </form>
-<br>
-<a th:href="@{/patients/list}">一覧に戻る</a>
+
+<!-- リハビリ記録 追加フォーム -->
+<h3>リハビリ記録 追加</h3>
+<form th:action="@{/patients/{id}/rehabRecord/add(id=${patient.id})}"
+      th:object="${rehabRecord}" method="post">
+  <input type="hidden" th:field="*{id}" />
+  <input type="hidden" th:field="*{patientId}" />
+  <input type="date" th:field="*{date}" />
+  <input type="text" th:field="*{content}" />
+  <button type="submit">追加</button>
+</form>
+
+<!-- リハビリ記録 編集フォーム -->
+<h3>これまでのリハビリ記録（編集可）</h3>
+<table border="1">
+  <tr>
+    <th>日付</th>
+    <th>内容</th>
+    <th>操作</th>
+  </tr>
+  <tr th:each="record : ${rehabRecords}">
+    <td>
+      <form th:action="@{/patients/{id}/rehabRecord/update(id=${patient.id})}" method="post">
+        <input type="hidden" name="id" th:value="${record.id}" />
+        <input type="hidden" name="patientId" th:value="${record.patientId}" />
+        <input type="date" name="date" th:value="${record.date}" />
+    <td>
+      <input type="text" name="content" th:value="${record.content}" />
+    </td>
+    <td>
+      <button type="submit">更新</button>
+      </form>
+    </td>
+  </tr>
+</table>
+<form th:action="@{/patients/list}" method="get">
+  <button type="submit">患者一覧へ戻る</button>
+</form>
 </body>
 </html>
-

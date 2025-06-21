@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="rehab_system.RehabRecordRepository">
+
+  <select id="findByPatientId" parameterType="long" resultType="rehab_system.RehabRecord">
+    SELECT * FROM rehab_records WHERE patient_id = #{patientId}
+  </select>
+
+  <insert id="insertRehabRecord" parameterType="rehab_system.RehabRecord" useGeneratedKeys="true" keyProperty="id">
+    INSERT INTO rehab_records(patient_id, date, content)
+    VALUES(#{patientId}, #{date}, #{content})
+  </insert>
+
+  <update id="updateRehabRecord" parameterType="rehab_system.RehabRecord">
+    UPDATE rehab_records
+    SET date = #{date},
+    content = #{content}
+    WHERE id = #{id}
+  </update>
+
+  <delete id="deleteRehabRecord" parameterType="long">
+    DELETE FROM rehab_records WHERE id = #{id}
+  </delete>
+
+  <select id="findById" parameterType="long" resultType="rehab_system.RehabRecord">
+    SELECT * FROM rehab_records WHERE id = #{id}
+  </select>
+
+
+</mapper>

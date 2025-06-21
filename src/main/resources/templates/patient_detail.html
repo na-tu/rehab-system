@@ -6,16 +6,8 @@
 </head>
 <body>
 <h1>患者詳細</h1>
-<table border="1">
-  <tr><th>ID</th><td th:text="${patient.id}"></td></tr>
-  <tr><th>名前</th><td th:text="${patient.name}"></td></tr>
-  <tr><th>年齢</th><td th:text="${patient.age}"></td></tr>
-  <tr><th>性別</th><td th:text="${patient.gender}"></td></tr>
-  <tr><th>疾患名</th><td th:text="${patient.diseaseName}"></td></tr>
-  <tr><th>開始日</th><td th:text="${patient.startDate}"></td></tr>
-  <tr><th>終了日</th><td th:text="${patient.endDate}"></td></tr>
-  <tr><th>備考</th><td th:text="${patient.notes}"></td></tr>
-</table>
+<!-- ★ ここでフラグメント呼び出し ★ -->
+<div th:replace="fragments/patientInfo :: patientInfoFragment"></div>
 
 <a th:href="@{/patients/{id}/edit(id=${patient.id})}">編集</a>
 <form th:action="@{/patients/{id}/delete(id=${patient.id})}" method="post" style="display:inline;">
@@ -23,5 +15,23 @@
 </form>
 <br><br>
 <a th:href="@{/patients/list}">一覧に戻る</a>
+
+<h2>リハビリ記録</h2>
+<table border="1">
+  <tr>
+    <th>ID</th>
+    <th>日付</th>
+    <th>内容</th>
+  </tr>
+  <tr th:each="record : ${rehabRecords}">
+    <td th:text="${record.id}"></td>
+    <td th:text="${record.date}"></td>
+    <td th:text="${record.content}"></td>
+  </tr>
+  <tr th:if="${#lists.isEmpty(rehabRecords)}">
+    <td colspan="3">記録はありません</td>
+  </tr>
+</table>
+
 </body>
 </html>

@@ -1,7 +1,9 @@
 package rehab_system;
 
+import java.util.List;
 import lombok.Data;
 import java.time.LocalDate;
+import java.sql.Date;
 
 @Data
 public class Patient {
@@ -10,9 +12,11 @@ public class Patient {
   private Integer age;
   private String gender;
   private String diseaseName;
-  private LocalDate startDate;
-  private LocalDate endDate;
+  private Date startDate;
+  private Date endDate;
   private String notes;
+  private List<RehabRecord> rehabRecords;
+
 }
 
 

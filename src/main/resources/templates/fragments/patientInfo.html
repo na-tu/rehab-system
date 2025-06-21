@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+</head>
+<body>
+<div th:fragment="patientInfoFragment">
+<h1>患者情報</h1>
+<table border="1">
+  <tr><th>ID</th><td th:text="${patient.id}"></td></tr>
+  <tr><th>名前</th><td th:text="${patient.name}"></td></tr>
+  <tr><th>年齢</th><td th:text="${patient.age}"></td></tr>
+  <tr><th>性別</th><td th:text="${patient.gender}"></td></tr>
+  <tr><th>疾患名</th><td th:text="${patient.diseaseName}"></td></tr>
+  <tr><th>開始日</th><td th:text="${patient.startDate}"></td></tr>
+  <tr><th>終了日</th><td th:text="${patient.endDate}"></td></tr>
+  <tr><th>備考</th><td th:text="${patient.notes}"></td></tr>
+</table>
+</div>

@@ -1,9 +1,19 @@
 package rehab_system;
 
 import java.util.List;
-import java.util.Map;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
+@Mapper
 public interface RehabRecordRepository {
-  List<Map<String, Object>> findAllRecords(); // メソッド名は任意（Mapperに合わせる）
-}
+  List<RehabRecord> findByPatientId(Long patientId);
+  void insertRehabRecord(RehabRecord record);
 
+  // 追加：更新用
+  void updateRehabRecord(RehabRecord record);
+
+  // 追加：削除用
+  void deleteRehabRecord(@Param("id") Long id);
+
+  RehabRecord findById(Long id);
+}

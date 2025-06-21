@@ -31,4 +31,10 @@ public class PatientRestController {
   public void addPatient(@RequestBody Map<String, Object> patient) {
     service.addPatient(patient);
   }
+
+  @GetMapping("/{id}/detail")
+  public PatientDetailDTO getPatientDetail(@PathVariable Long id) {
+    return service.getPatientDetail(id);
+  }
+
 }
