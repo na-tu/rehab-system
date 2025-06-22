@@ -6,6 +6,8 @@
 </head>
 <body>
 <h1>患者一覧</h1>
+<!-- 成功メッセージ -->
+<p th:if="${message}" th:text="${message}" style="color: green; font-weight: bold;"></p>
 <table border="1">
   <tr>
     <th>ID</th><th>名前</th><th>年齢</th><th>性別</th><th>病名</th><th>治療開始日</th><th>治療終了日</th><th>備考</th>
@@ -23,6 +25,7 @@
     <td th:text="${patient.notes}"></td>
   </tr>
 </table>
-<a th:href="@{/patients/new}">新規登録へ</a>
+<a th:href="@{/patients/new}">患者新規登録へ</a>
+<a th:href="@{/}">ＨＯＭＥ</a>
 </body>
 </html>

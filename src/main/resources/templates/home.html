@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <title>HOME</title>
+</head>
+<body>
+<h1 th:text="${message}"></h1>
+<h3>医療法人　〇〇病院　リハビリテーション課</h3>
+</body>
+<a th:href="@{/patients/new}">患者新規登録へ</a>
+<a th:href="@{/patients/list}">患者一覧</a>
+</html>

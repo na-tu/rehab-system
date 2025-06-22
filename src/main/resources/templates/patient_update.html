@@ -6,12 +6,13 @@
 </head>
 <body>
 <h1>患者登録編集</h1>
-
+<!-- 成功メッセージ -->
+<p th:if="${message}" th:text="${message}" style="color: green; font-weight: bold;"></p>
 <!-- 患者編集フォーム -->
 <form th:action="${patient.id} != null ? @{/patients/{id}/update(id=${patient.id})} : @{/patients/register}"
       th:object="${patient}" method="post">
   <div th:replace="~{fragments/patientForm :: patientFormFragment}"></div>
-  <button type="submit">登録</button>
+  <button type="submit">更新</button>
 </form>
 
 <!-- リハビリ記録 追加フォーム -->

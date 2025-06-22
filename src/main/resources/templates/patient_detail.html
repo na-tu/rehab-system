@@ -6,6 +6,8 @@
 </head>
 <body>
 <h1>患者詳細</h1>
+<!-- 成功メッセージ -->
+<p th:if="${message}" th:text="${message}" style="color: green; font-weight: bold;"></p>
 <!-- ★ ここでフラグメント呼び出し ★ -->
 <div th:replace="fragments/patientInfo :: patientInfoFragment"></div>
 
@@ -14,7 +16,7 @@
   <button type="submit" onclick="return confirm('本当に削除しますか？');">削除</button>
 </form>
 <br><br>
-<a th:href="@{/patients/list}">一覧に戻る</a>
+<a th:href="@{/patients/list}">患者一覧に戻る</a>
 
 <h2>リハビリ記録</h2>
 <table border="1">
