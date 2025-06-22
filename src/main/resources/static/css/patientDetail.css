@@ -1,0 +1,113 @@
+body {
+  font-family: 'Noto Sans JP', '游ゴシック', sans-serif;
+  background-color: #f4f8fb;
+  margin: 0;
+  padding: 0;
+  color: #333;
+}
+
+.detail-container {
+  max-width: 800px;
+  margin: 50px auto;
+  padding: 30px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+h1{
+  text-align: left;
+  color: #0077cc;
+  margin-bottom: 20px;
+}
+h2{
+  text-align: reft;
+  color: #0080cc;
+  margin-bottom: 20px;
+}
+
+.success-message {
+  color: green;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* テーブルデザイン */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+table th, table td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: center;
+  min-width: 100px; /* カラム幅を広げたい場合ここを調整 */
+}
+
+table th {
+  background-color: #0077cc;
+  color: #fff;
+}
+
+table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+table tr:hover {
+  background-color: #eef5fb;
+}
+
+/* ボタン＆リンク */
+.action-links {
+  text-align: center;
+  margin: 20px 0;
+}
+
+.button, .delete-button {
+  display: inline-block;
+  padding: 10px 20px;
+  margin: 0 10px;
+  border-radius: 8px;
+  color: #fff;
+  text-decoration: none;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.button {
+  background-color: #0077cc;
+}
+
+.button:hover {
+  background-color: #005fa3;
+  transform: translateY(-2px);
+}
+
+.delete-button {
+  background-color: #cc3300;
+  border: none;
+}
+
+.delete-button:hover {
+  background-color: #a62800;
+  transform: translateY(-2px);
+}
+
+/* 戻るリンク */
+.back-link {
+  display: block;
+  text-align: center;
+  color: #0077cc;
+  text-decoration: none;
+  margin-top: 20px;
+  transition: color 0.3s;
+}
+
+.back-link:hover {
+  color: #005fa3;
+  text-decoration: underline;
+}

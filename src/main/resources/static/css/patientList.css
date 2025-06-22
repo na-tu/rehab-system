@@ -1,0 +1,103 @@
+body {
+  font-family: 'Noto Sans JP', '游ゴシック', sans-serif;
+  background-color: #f4f8fb;
+  margin: 0;
+  padding: 0;
+  color: #333;
+}
+
+.list-container {
+  max-width: 900px;
+  margin: 50px auto;
+  padding: 30px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  font-size: 24px;
+  color: #0077cc;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.success-message {
+  color: green;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* テーブルデザイン */
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+table th, table td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: center;
+}
+
+table td:nth-child(2), /* 名前 */
+table th:nth-child(2) {
+  min-width: 150px;
+}
+
+table td:nth-child(5), /* 備考 */
+table th:nth-child(5) {
+  min-width: 100px;
+}
+
+table td:nth-child(8), /* 備考 */
+table th:nth-child(8) {
+  min-width: 200px;
+}
+
+table th {
+  background-color: #0077cc;
+  color: #fff;
+}
+
+table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+table tr:hover {
+  background-color: #eef5fb;
+}
+
+/* リンクデザイン */
+table a {
+  color: #0077cc;
+  text-decoration: none;
+}
+
+table a:hover {
+  text-decoration: underline;
+}
+
+/* ボタンリンク */
+.nav-links {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.button {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #0077cc;
+  color: #fff;
+  border-radius: 8px;
+  text-decoration: none;
+  font-size: 14px;
+  margin: 0 10px;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.button:hover {
+  background-color: #005fa3;
+  transform: translateY(-2px);
+}

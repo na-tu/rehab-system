@@ -3,29 +3,50 @@
 <head>
   <meta charset="UTF-8" />
   <title>新規患者登録フォーム</title>
+  <link rel="stylesheet" href="/css/patientNew.css" />
 </head>
 <body>
-<h1>新規患者登録</h1>
-<form th:action="${patient.id} != null ? @{/patients/{id}/update(id=${patient.id})} : @{/patients/register}"
-      th:object="${patient}" method="post">
-  <label>名前: <input type="text" th:field="*{name}" required /></label><br>
-  <label>年齢: <input type="number" th:field="*{age}" min="0" /></label><br>
-  <label>性別:
-    <select th:field="*{gender}">
-      <option value="">選択してください</option>
-      <option value="男性">男性</option>
-      <option value="女性">女性</option>
-      <option value="その他">その他</option>
-    </select>
-  </label><br>
-  <label>疾患名: <input type="text" th:field="*{diseaseName}" /></label><br>
-  <label>治療開始日: <input type="date" th:field="*{startDate}" /></label><br>
-  <label>治療終了日: <input type="date" th:field="*{endDate}" /></label><br>
-  <label>備考: <textarea th:field="*{notes}" rows="4" cols="30"></textarea></label><br>
-  <button type="submit">登録</button>
-</form>
-<br>
-<a th:href="@{/patients/list}">患者一覧に戻る</a>
+<div class="form-container">
+  <h1>新規患者登録</h1>
+  <form th:action="${patient.id} != null ? @{/patients/{id}/update(id=${patient.id})} : @{/patients/register}"
+        th:object="${patient}" method="post" class="patient-form">
+
+    <label>名前:
+      <input type="text" th:field="*{name}" required />
+    </label>
+
+    <label>年齢:
+      <input type="number" th:field="*{age}" min="0" />
+    </label>
+
+    <label>性別:
+      <select th:field="*{gender}">
+        <option value="">選択してください</option>
+        <option value="男性">男性</option>
+        <option value="女性">女性</option>
+        <option value="その他">その他</option>
+      </select>
+    </label>
+
+    <label>疾患名:
+      <input type="text" th:field="*{diseaseName}" />
+    </label>
+
+    <label>治療開始日:
+      <input type="date" th:field="*{startDate}" />
+    </label>
+
+    <label>治療終了日:
+      <input type="date" th:field="*{endDate}" />
+    </label>
+
+    <label>備考:
+      <textarea th:field="*{notes}" rows="4" cols="30"></textarea>
+    </label>
+
+    <button type="submit" class="submit-button">登録</button>
+  </form>
+  <a th:href="@{/patients/list}" class="back-link">患者一覧に戻る</a>
+</div>
 </body>
 </html>
-

@@ -3,37 +3,47 @@
 <head>
   <meta charset="UTF-8" />
   <title>患者詳細</title>
+  <link rel="stylesheet" href="/css/patientDetail.css" />
 </head>
 <body>
-<h1>患者詳細</h1>
-<!-- 成功メッセージ -->
-<p th:if="${message}" th:text="${message}" style="color: green; font-weight: bold;"></p>
-<!-- ★ ここでフラグメント呼び出し ★ -->
-<div th:replace="fragments/patientInfo :: patientInfoFragment"></div>
+<div class="detail-container">
+  <h1>患者詳細</h1>
 
-<a th:href="@{/patients/{id}/edit(id=${patient.id})}">編集</a>
-<form th:action="@{/patients/{id}/delete(id=${patient.id})}" method="post" style="display:inline;">
-  <button type="submit" onclick="return confirm('本当に削除しますか？');">削除</button>
-</form>
-<br><br>
-<a th:href="@{/patients/list}">患者一覧に戻る</a>
+  <!-- 成功メッセージ -->
+  <p th:if="${message}" th:text="${message}" class="success-message"></p>
 
-<h2>リハビリ記録</h2>
-<table border="1">
-  <tr>
-    <th>ID</th>
-    <th>実施日</th>
-    <th>リハビリ内容・評価</th>
-  </tr>
-  <tr th:each="record : ${rehabRecords}">
-    <td th:text="${record.id}"></td>
-    <td th:text="${record.date}"></td>
-    <td th:text="${record.content}"></td>
-  </tr>
-  <tr th:if="${#lists.isEmpty(rehabRecords)}">
-    <td colspan="3">記録はありません</td>
-  </tr>
-</table>
+  <!-- ★ フラグメント呼び出し ★ -->
+  <div th:replace="fragments/patientInfo :: patientInfoFragment"></div>
 
+  <div class="action-links">
+    <a th:href="@{/patients/{id}/edit(id=${patient.id})}" class="button">編集</a>
+    <form th:action="@{/patients/{id}/delete(id=${patient.id})}" method="post" style="display:inline;">
+      <button type="submit" onclick="return confirm('本当に削除しますか？');" class="delete-button">患者情報全削除</button>
+    </form>
+  </div>
+
+  <a th:href="@{/patients/list}" class="back-link">患者一覧に戻る</a>
+
+  <h1>リハビリ記録</h1>
+  <table>
+    <thead>
+    <tr>
+      <th>ID</th>
+      <th>実施日</th>
+      <th>リハビリ内容・評価</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="record : ${rehabRecords}">
+      <td th:text="${record.id}"></td>
+      <td th:text="${record.date}"></td>
+      <td th:text="${record.content}"></td>
+    </tr>
+    <tr th:if="${#lists.isEmpty(rehabRecords)}">
+      <td colspan="3">記録はありません</td>
+    </tr>
+    </tbody>
+  </table>
+</div>
 </body>
 </html>

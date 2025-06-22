@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <title>患者編集フォーム</title>
+  <link rel="stylesheet" href="/css/patientUpdate.css" />
 </head>
 <body>
 <h1>患者登録編集</h1>
@@ -41,9 +42,8 @@
         <input type="hidden" name="patientId" th:value="${record.patientId}" />
         <input type="date" name="date" th:value="${record.date}" />
     <td>
-      <input type="text" name="content" th:value="${record.content}" />
+          <textarea name="content" rows="4" cols="30" th:text="${record.content}"></textarea>
     </td>
-
     <td>
       <button type="submit">更新</button>
       </form>

@@ -1,0 +1,158 @@
+body {
+  font-family: 'Noto Sans JP', '游ゴシック', sans-serif;
+  background-color: #f4f8fb;
+  margin: 0;
+  padding: 0 20px 50px;
+  color: #333;
+}
+
+h1, h3 {
+  color: #0077cc;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+p[th\\:if] {
+  color: green;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* フォーム全体の枠 */
+form {
+  background: #fff;
+  max-width: 700px;
+  margin: 0 auto 30px;
+  padding: 20px 30px;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+/* 患者編集フォームの中身はフラグメントなので調整はそちらで */
+/* リハビリ記録追加フォームの入力 */
+form input[type="date"],
+form input[type="text"] {
+  padding: 8px 10px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  width: calc(100% - 20px);
+  margin-bottom: 10px;
+  box-sizing: border-box;
+  background-color: #fafafa;
+  transition: border-color 0.3s;
+}
+
+
+
+form input[type="date"]:focus,
+form input[type="text"]:focus {
+  border-color: #0077cc;
+  outline: none;
+}
+
+/* ボタン */
+button {
+  padding: 12px 25px;
+  background-color: #0077cc;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  font-size: 15px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+button:hover {
+  background-color: #005fa3;
+  transform: translateY(-2px);
+}
+
+/* テーブル全体 */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  max-width: 700px;
+  margin: 0 auto;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+/* テーブルヘッダー */
+table th {
+  background-color: #0077cc;
+  color: white;
+  padding: 10px;
+  border: 1px solid #ddd;
+}
+
+/* テーブルセル */
+table td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: center;
+}
+
+/* テーブル偶数行の背景色 */
+table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+/* テーブル行のホバー効果 */
+table tr:hover {
+  background-color: #eef5fb;
+}
+
+/* リハビリ内容のテキスト入力は幅広め */
+table input[type="text"] {
+  width: 90%;
+  padding: 6px 8px;
+  font-size: 14px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+/* リハビリ実施日の入力幅 */
+table input[type="date"] {
+  width: 90%;
+}
+
+/* テーブル内のボタンを少し小さく */
+table button {
+  padding: 6px 14px;
+  font-size: 14px;
+  border-radius: 6px;
+}
+
+/* 削除ボタンは赤色で目立たせる */
+form[style*="display:inline;"] button {
+  background-color: #cc3300;
+}
+
+form[style*="display:inline;"] button:hover {
+  background-color: #a62800;
+  transform: translateY(-2px);
+}
+
+/* 患者詳細＆患者一覧への戻るボタン配置 */
+form[th\\:action*="/patients/list"],
+form[th\\:action*="/patients/"] {
+  max-width: 700px;
+  margin: 20px auto 0;
+  text-align: center;
+}
+
+/* 画面幅狭い場合の調整 */
+@media screen and (max-width: 768px) {
+  form, table {
+    width: 100%;
+    margin: 0 auto 20px;
+  }
+  table input[type="text"],
+  table input[type="date"] {
+    width: 100%;
+  }
+}
