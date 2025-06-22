@@ -8,7 +8,7 @@
 <h1>患者一覧</h1>
 <table border="1">
   <tr>
-    <th>ID</th><th>名前</th><th>年齢</th><th>性別</th><th>病名</th><th>開始日</th><th>終了日</th><th>備考</th>
+    <th>ID</th><th>名前</th><th>年齢</th><th>性別</th><th>病名</th><th>治療開始日</th><th>治療終了日</th><th>備考</th>
   </tr>
   <tr th:each="patient : ${patients}">
     <td th:text="${patient.id}"></td>

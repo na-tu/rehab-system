@@ -90,7 +90,7 @@ public class PatientViewController {
   public String updatePatient(@PathVariable Long id, @ModelAttribute Patient patient) {
     patient.setId(id);  // 念のためIDセット
     patientService.updatePatient(patient);
-    return "redirect:/patients/list";
+    return "patient_detail";
   }
 
   // 削除処理
@@ -112,7 +112,13 @@ public class PatientViewController {
 public String updateRehabRecord(@PathVariable("id") Long id, @ModelAttribute RehabRecord rehabRecord) {
   rehabRecord.setPatientId(id);
   rehabRecordService.updateRehabRecord(rehabRecord);
-  return "redirect:/patients/" + id + "/edit";  // ← 編集画面に戻る
+  return "redirect:/patients/" + id;  // ← 編集画面に戻る
 }
+  // リハビリ記録の削除処理
+  @PostMapping("/{patientId}/rehabRecord/{recordId}/delete")
+  public String deleteRehabRecord(@PathVariable ("patientId")Long patientId,@PathVariable("recordId")Long recordId) {
+    rehabRecordService.deleteRehabRecord(recordId);
+    return "redirect:/patients/" + patientId + "/edit";
+  }
 
 }

@@ -26,11 +26,11 @@
 </form>
 
 <!-- リハビリ記録 編集フォーム -->
-<h3>これまでのリハビリ記録（編集可）</h3>
+<h3>これまでのリハビリ記録</h3>
 <table border="1">
   <tr>
-    <th>日付</th>
-    <th>内容</th>
+    <th>実施日</th>
+    <th>リハビリ内容・評価</th>
     <th>操作</th>
   </tr>
   <tr th:each="record : ${rehabRecords}">
@@ -42,8 +42,13 @@
     <td>
       <input type="text" name="content" th:value="${record.content}" />
     </td>
+
     <td>
       <button type="submit">更新</button>
+      </form>
+      <!-- ★削除ボタン -->
+      <form th:action="@{'/patients/' + ${patient.id} + '/rehabRecord/' + ${record.id} + '/delete'}" method="post" style="display:inline;">
+        <button type="submit" onclick="return confirm('本当に削除しますか？')">削除</button>
       </form>
     </td>
   </tr>
@@ -51,5 +56,10 @@
 <form th:action="@{/patients/list}" method="get">
   <button type="submit">患者一覧へ戻る</button>
 </form>
+<!-- 患者詳細ページへ戻るボタン -->
+<form th:action="@{'/patients/' + ${patient.id}}" method="get" style="display:inline;">
+  <button type="submit">患者詳細ページに戻る</button>
+</form>
+
 </body>
 </html>
