@@ -10,24 +10,29 @@
   </select>
 
   <insert id="insertRehabRecord" parameterType="rehab_system.RehabRecord" useGeneratedKeys="true" keyProperty="id">
-    INSERT INTO rehab_records(patient_id, date, content)
-    VALUES(#{patientId}, #{date}, #{content})
+    INSERT INTO rehab_records(patient_id, date, content, barthel_index)
+    VALUES (#{patientId}, #{date}, #{content}, #{barthelIndex})
   </insert>
 
   <update id="updateRehabRecord" parameterType="rehab_system.RehabRecord">
     UPDATE rehab_records
-    SET date = #{date},
-    content = #{content}
+    SET
+    date = #{date},
+    content = #{content},
+    barthel_index = #{barthelIndex}
     WHERE id = #{id}
   </update>
+
 
   <delete id="deleteRehabRecord" parameterType="long">
     DELETE FROM rehab_records WHERE id = #{id}
   </delete>
 
-  <select id="findById" parameterType="long" resultType="rehab_system.RehabRecord">
-    SELECT * FROM rehab_records WHERE id = #{id}
+  <select id="getMonthlyBarthelAverage" parameterType="map" resultType="double">
+    SELECT AVG(barthel_index)
+    FROM rehab_records
+    WHERE patient_id = #{patientId}
+    AND DATE_FORMAT(date, '%Y-%m') = #{yearMonth}
   </select>
-
 
 </mapper>

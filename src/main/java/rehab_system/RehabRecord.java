@@ -9,4 +9,5 @@ public class RehabRecord {
   private Long patientId;
   private LocalDate date;
   private String content;
+  private Integer barthelIndex;
 }

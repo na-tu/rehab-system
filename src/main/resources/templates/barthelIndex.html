@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Barthel Index</title>
+</head>
+<body>
+<h1>Barthel Index</h1>
+
+<!-- メッセージ表示（成功メッセージ） -->
+<p th:if="${message}" th:text="${message}" style="color: green; font-weight: bold; border: 1px solid green; padding: 5px;"></p>
+
+<!-- ★ ① Barthel Index 新規入力フォーム -->
+<h2>新規Barthel Index 登録</h2>
+<form th:action="@{/patients/{id}/barthelIndex/add(id=${newRecord.patientId})}" th:object="${newRecord}" method="post">
+  <label for="date">実施日：</label>
+  <input type="date" id="date" th:field="*{date}" th:value="${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}" required><br><br>
+
+  <label for="barthelIndex">Barthel Index 値：</label>
+  <input type="number" id="barthelIndex" th:field="*{barthelIndex}" min="0" max="100" required><br><br>
+
+  <button type="submit">登録する</button>
+</form>
+
+<hr>
+
+<!-- ★ ② 月別平均値表示 -->
+<h2>月ごとの平均を見る</h2>
+<form th:action="@{/patients/{id}/barthelIndex(id=${newRecord.patientId})}" method="get">
+  <input type="month" name="yearMonth" th:value="${yearMonth}" required>
+  <button type="submit">平均を表示</button>
+</form>
+
+<!-- ★ ③ 平均値の表示 -->
+<div th:if="${barthelIndex}">
+  <h3>選択した月：<span th:text="${barthelIndex.yearMonth}"></span></h3>
+  <h3>月平均：<span th:text="${barthelIndex.average != null ? barthelIndex.average : 'データなし'}"></span></h3>
+</div>
+
+<!-- 戻るリンク -->
+<br>
+<a th:href="@{/patients/{id}(id=${newRecord.patientId})}" style="text-decoration: none; color: blue; font-weight: bold;">← 患者詳細に戻る</a>
+
+</body>
+</html>

@@ -24,6 +24,7 @@
   <input type="hidden" th:field="*{patientId}" />
   <input type="date" th:field="*{date}" />
   <input type="text" th:field="*{content}" />
+  <input type="number" th:field="*{barthelIndex}" min="0" max="100" />
   <button type="submit">追加</button>
 </form>
 
@@ -33,6 +34,7 @@
   <tr>
     <th>実施日</th>
     <th>リハビリ内容・評価</th>
+    <th>BarthelIndex</th>
     <th>操作</th>
   </tr>
   <tr th:each="record : ${rehabRecords}">

@@ -1,6 +1,8 @@
 package rehab_system;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +17,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import rehab_system.BarthelIndex;
 
 @Controller
 @RequestMapping("/patients")
@@ -31,6 +35,9 @@ public class PatientViewController {
     public PatientViewController(PatientService patientService) {
       this.patientService = patientService;
     }
+
+  @Autowired
+  private BarthelIndexService barthelIndexService;
 
     //日付がnullでも登録できるように追加
   @InitBinder
@@ -84,6 +91,7 @@ public class PatientViewController {
     model.addAttribute("patient", patient);
     model.addAttribute("rehabRecord", new RehabRecord());//追加用フォームの空オブジェクト
     model.addAttribute("rehabRecords", rehabRecords);
+    model.addAttribute("barthelIndex", new BarthelIndex());
     return "patient_update";
   }
 
@@ -128,5 +136,35 @@ public String updateRehabRecord(@PathVariable("id") Long id, @ModelAttribute Reh
     redirectAttributes.addFlashAttribute("message", "リハビリ情報を削除しました。");
     return "redirect:/patients/" + patientId + "/edit";
   }
+  @GetMapping("/{id}/barthelIndex")
+  public String getMonthlyBarthelIndex(@PathVariable("id") Long patientId,
+      @RequestParam(value = "yearMonth", required = false) String yearMonth,
+      Model model) {
+    if (yearMonth == null || yearMonth.isBlank()) {
+      // 今月の年月をセット（例: "2025-06"）
+      yearMonth = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM"));
+    }
+
+    BarthelIndex index = barthelIndexService.calculateMonthlyBarthelIndex(patientId, yearMonth);
+
+    RehabRecord newRecord = new RehabRecord();
+    newRecord.setPatientId(patientId);
+
+    model.addAttribute("newRecord", newRecord);
+    model.addAttribute("barthelIndex", index);
+    model.addAttribute("yearMonth", yearMonth);
+
+    return "barthelIndex"; // ご自身のビュー名に合わせてください
+  }
+  @PostMapping("/{id}/barthelIndex/add")
+  public String addBarthelIndex(@PathVariable("id") Long patientId,
+      @ModelAttribute RehabRecord newRecord,
+      RedirectAttributes redirectAttributes) {
+    newRecord.setPatientId(patientId);
+    rehabRecordService.addRehabRecord(newRecord);
+    redirectAttributes.addFlashAttribute("message", "Barthel Indexを追加しました。");
+    return "redirect:/patients/" + patientId + "/barthelIndex";
+  }
+
 
 }
