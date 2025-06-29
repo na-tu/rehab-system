@@ -7,7 +7,6 @@ import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,27 +18,24 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import rehab_system.BarthelIndex;
+import rehab_system.dto.RehabRecordListWrapper;
 
 @Controller
 @RequestMapping("/patients")
 public class PatientViewController {
 
-    private final PatientService patientService;
+  private final PatientService patientService;
 
   @Autowired
   private RehabRecordService rehabRecordService;
 
 
   @Autowired
-    public PatientViewController(PatientService patientService) {
-      this.patientService = patientService;
-    }
+  public PatientViewController(PatientService patientService) {
+    this.patientService = patientService;
+  }
 
-  @Autowired
-  private BarthelIndexService barthelIndexService;
-
-    //日付がnullでも登録できるように追加
+  //日付がnullでも登録できるように追加
   @InitBinder
   public void initBinder(WebDataBinder binder) {
     SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -47,28 +43,31 @@ public class PatientViewController {
     binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
     // ↑ true = ""(空文字)のときnullを許す
   }
-    // 登録フォーム表示
-    @GetMapping("/new")
-    public String showRegistrationForm(Model model) {
-      model.addAttribute("patient", new Patient());
-      return "patient_new";
-    }
 
-    // 患者登録処理
-    @PostMapping("/register")
-    public String registerPatient(@ModelAttribute Patient patient, RedirectAttributes redirectAttributes) {
-      patientService.registerPatient(patient);
-      // 成功メッセージをフラッシュ属性に保存
-      redirectAttributes.addFlashAttribute("message", "新規登録が成功しました。");
-      return "redirect:/patients/list";
-    }
+  // 登録フォーム表示
+  @GetMapping("/new")
+  public String showRegistrationForm(Model model) {
+    model.addAttribute("patient", new Patient());
+    return "patient_new";
+  }
 
-    // 一覧表示
-    @GetMapping("/list")
-    public String listPatients(Model model) {
-      model.addAttribute("patients", patientService.getAllPatientsForView());
-      return "patient_list";
-    }
+  // 患者登録処理
+  @PostMapping("/register")
+  public String registerPatient(@ModelAttribute Patient patient,
+      RedirectAttributes redirectAttributes) {
+    patientService.registerPatient(patient);
+    // 成功メッセージをフラッシュ属性に保存
+    redirectAttributes.addFlashAttribute("message", "新規登録が成功しました。");
+    return "redirect:/patients/list";
+  }
+
+  // 一覧表示
+  @GetMapping("/list")
+  public String listPatients(Model model) {
+    model.addAttribute("patients", patientService.getAllPatientsForView());
+    return "patient_list";
+  }
+
   // 詳細表示フォーム
   @GetMapping("/{id}")
   public String showPatientDetail(@PathVariable Long id, Model model) {
@@ -85,86 +84,94 @@ public class PatientViewController {
     //System.out.println("patientId:" +id);
     Patient patient = patientService.getPatientForView(id);// ここにリハビリ記録をセットするコードを追加する
     List<RehabRecord> rehabRecords = rehabRecordService.getRecordsByPatientId(id);
-    System.out.println("rehabRecords: " + rehabRecords);
-    patient.setRehabRecords(rehabRecords);
+
+    RehabRecordListWrapper wrapper = new RehabRecordListWrapper();
+    wrapper.setRehabRecords(rehabRecords);
+
     // modelに追加して、Thymeleafで使えるようにする
     model.addAttribute("patient", patient);
     model.addAttribute("rehabRecord", new RehabRecord());//追加用フォームの空オブジェクト
+    model.addAttribute("wrapper", wrapper);
     model.addAttribute("rehabRecords", rehabRecords);
-    model.addAttribute("barthelIndex", new BarthelIndex());
+
     return "patient_update";
   }
 
   // 患者更新処理
-  @PostMapping("/{id}/update")
-  public String updatePatient(@PathVariable Long id, @ModelAttribute Patient patient,RedirectAttributes redirectAttributes) {
+  @PostMapping("/{id}/edit")
+  public String updatePatient(@PathVariable Long id, @ModelAttribute Patient patient,
+      RedirectAttributes redirectAttributes) {
     patient.setId(id);  // 念のためIDセット
     patientService.updatePatient(patient);
     // 成功メッセージをフラッシュ属性に保存
     redirectAttributes.addFlashAttribute("message", "患者情報を更新しました。");
-    return "redirect:/patients/"+id;
+    return "redirect:/patients/" + id;
   }
 
   // 削除処理
   @PostMapping("/{id}/delete")
-  public String deletePatient(@PathVariable Long id,RedirectAttributes redirectAttributes) {
+  public String deletePatient(@PathVariable Long id, RedirectAttributes redirectAttributes) {
     patientService.deletePatient(id);
     redirectAttributes.addFlashAttribute("message", "患者情報を削除しました。");
     return "redirect:/patients/list";
   }
-//リハビリ記録の新規追加
+
+  //リハビリ記録の新規追加
   @PostMapping("/{id}/rehabRecord/add")
-  public String addRehabRecord(@PathVariable Long id, @ModelAttribute RehabRecord rehabRecord,RedirectAttributes redirectAttributes) {
+  public String addRehabRecord(@PathVariable Long id, @ModelAttribute RehabRecord rehabRecord,
+      RedirectAttributes redirectAttributes) {
     rehabRecord.setPatientId(id);  // 患者IDセット
     rehabRecordService.addRehabRecord(rehabRecord);
     redirectAttributes.addFlashAttribute("message", "リハビリ情報を追加しました。");
     return "redirect:/patients/" + id + "/edit";  // 編集画面に戻る
   }
 
-//★リハビリ記録の更新処理（編集画面に戻る）
-@PostMapping("/{id}/rehabRecord/update")
-public String updateRehabRecord(@PathVariable("id") Long id, @ModelAttribute RehabRecord rehabRecord,RedirectAttributes redirectAttributes) {
-  rehabRecord.setPatientId(id);
-  rehabRecordService.updateRehabRecord(rehabRecord);
-  redirectAttributes.addFlashAttribute("message", "リハビリ情報を更新しました。");
-  return "redirect:/patients/" + id;  // ← 編集画面に戻る
-}
+  //★リハビリ記録の更新処理（編集画面に戻る）
+  @PostMapping("/{id}/rehabRecord/update")
+  public String updateRehabRecord(@PathVariable("id") Long id,
+      @ModelAttribute RehabRecordListWrapper wrapper, RedirectAttributes redirectAttributes) {
+    for (RehabRecord record : wrapper.getRehabRecords()) {
+      record.setPatientId(id);
+      rehabRecordService.updateRehabRecord(record);
+    }
+    redirectAttributes.addFlashAttribute("message", "リハビリ情報を更新しました。");
+    return "redirect:/patients/" + id;  // ← 編集画面に戻る
+  }
+
   // リハビリ記録の削除処理
   @PostMapping("/{patientId}/rehabRecord/{recordId}/delete")
-  public String deleteRehabRecord(@PathVariable ("patientId")Long patientId,@PathVariable("recordId")Long recordId,RedirectAttributes redirectAttributes) {
+  public String deleteRehabRecord(@PathVariable("patientId") Long patientId,
+      @PathVariable("recordId") Long recordId, RedirectAttributes redirectAttributes) {
     rehabRecordService.deleteRehabRecord(recordId);
     redirectAttributes.addFlashAttribute("message", "リハビリ情報を削除しました。");
     return "redirect:/patients/" + patientId + "/edit";
   }
+
   @GetMapping("/{id}/barthelIndex")
   public String getMonthlyBarthelIndex(@PathVariable("id") Long patientId,
       @RequestParam(value = "yearMonth", required = false) String yearMonth,
       Model model) {
-    if (yearMonth == null || yearMonth.isBlank()) {
-      // 今月の年月をセット（例: "2025-06"）
+
+    if (yearMonth == null || yearMonth.isEmpty()) {
       yearMonth = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM"));
     }
 
-    BarthelIndex index = barthelIndexService.calculateMonthlyBarthelIndex(patientId, yearMonth);
+    Double average = rehabRecordService.getMonthlyBarthelAverage(patientId, yearMonth);
+
+    BarthelIndex barthelIndex;
+    if (average == null) {
+      barthelIndex = new BarthelIndex(patientId, yearMonth, 0);
+    } else {
+      barthelIndex = new BarthelIndex(patientId, yearMonth, average.intValue());
+    }
 
     RehabRecord newRecord = new RehabRecord();
     newRecord.setPatientId(patientId);
 
     model.addAttribute("newRecord", newRecord);
-    model.addAttribute("barthelIndex", index);
     model.addAttribute("yearMonth", yearMonth);
+    model.addAttribute("barthelIndex", barthelIndex);
 
-    return "barthelIndex"; // ご自身のビュー名に合わせてください
+    return "barthelIndex";
   }
-  @PostMapping("/{id}/barthelIndex/add")
-  public String addBarthelIndex(@PathVariable("id") Long patientId,
-      @ModelAttribute RehabRecord newRecord,
-      RedirectAttributes redirectAttributes) {
-    newRecord.setPatientId(patientId);
-    rehabRecordService.addRehabRecord(newRecord);
-    redirectAttributes.addFlashAttribute("message", "Barthel Indexを追加しました。");
-    return "redirect:/patients/" + patientId + "/barthelIndex";
-  }
-
-
 }

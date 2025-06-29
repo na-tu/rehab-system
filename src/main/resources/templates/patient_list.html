@@ -15,7 +15,6 @@
   <table>
     <thead>
     <tr>
-      <th>ID</th>
       <th>名前</th>
       <th>年齢</th>
       <th>性別</th>
@@ -27,7 +26,7 @@
     </thead>
     <tbody>
     <tr th:each="patient : ${patients}">
-      <td th:text="${patient.id}"></td>
+
       <td>
         <a th:href="@{/patients/{id}(id=${patient.id})}" th:text="${patient.name}"></a>
       </td>

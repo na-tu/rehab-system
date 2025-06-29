@@ -16,7 +16,11 @@ public class RehabRecordService {
 
   // 指定患者IDのリハビリ記録一覧を取得
   public List<RehabRecord> getRecordsByPatientId(Long patientId) {
-    return rehabRecordRepository.findByPatientId(patientId);
+    List<RehabRecord> records = rehabRecordRepository.findByPatientId(patientId);
+    // ★日付の降順（新しい日付が上）で並び替え
+    records.sort((r1, r2) -> r2.getDate().compareTo(r1.getDate()));
+
+    return records;
   }
 
   // リハビリ記録の新規登録
@@ -24,12 +28,12 @@ public class RehabRecordService {
     rehabRecordRepository.insertRehabRecord(record);
   }
 
-  // 追加：更新
+  // 更新
   public void updateRehabRecord(RehabRecord record) {
     rehabRecordRepository.updateRehabRecord(record);
   }
 
-  // 追加：削除
+  // 削除
   public void deleteRehabRecord(Long id) {
     rehabRecordRepository.deleteRehabRecord(id);
   }
@@ -44,15 +48,6 @@ public class RehabRecordService {
     params.put("patientId", patientId);
     params.put("yearMonth", yearMonth);
     return rehabRecordRepository.getMonthlyBarthelAverage(patientId, yearMonth);
-  }
-
-  // BarthelIndexクラスを返す場合
-  public BarthelIndex getMonthlyBarthelIndex(Long patientId, String yearMonth) {
-    Double average = getMonthlyBarthelAverage(patientId, yearMonth);
-    if (average == null) {
-      average = 0.0;
-    }
-    return new BarthelIndex(patientId.intValue(), yearMonth, average);
   }
 
 

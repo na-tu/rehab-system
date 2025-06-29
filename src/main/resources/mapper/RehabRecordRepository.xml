@@ -35,4 +35,18 @@
     AND DATE_FORMAT(date, '%Y-%m') = #{yearMonth}
   </select>
 
+  <select id="findBarthelRecordsByPatientId" parameterType="long" resultType="rehab_system.RehabRecord">
+    SELECT id, patient_id, date, barthel_index
+    FROM rehab_records
+    WHERE patient_id = #{patientId}
+    ORDER BY date DESC
+  </select>
+
+  <update id="clearBarthelIndexValue">
+    UPDATE rehab_records
+    SET barthel_index = NULL
+    WHERE id = #{recordId}
+  </update>
+
+
 </mapper>

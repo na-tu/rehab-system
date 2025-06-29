@@ -1,0 +1,95 @@
+/* ===== 全体設定 ===== */
+body {
+  font-family: "Segoe UI", sans-serif;
+  background-color: #f9f9f9;
+  color: #333;
+  margin: 0;
+  padding: 40px;
+}
+
+/* ===== 見出し ===== */
+h1, h2, h3 {
+  color: #2c3e50;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+/* ===== フォーム全体 ===== */
+ form {
+   background-color: #ffffff;
+   border: 1px solid #ddd;
+   padding: 20px;
+ }
+
+/* ===== ラベルと入力フィールド ===== */
+label {
+  display: inline-block;
+  width: 150px;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+input[type="date"],
+input[type="month"],
+input[type="number"] {
+  padding: 6px 10px;
+  width: 100px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  margin-bottom: 12px;
+}
+
+/* ===== ボタン ===== */
+button {
+  background-color: #3498db;
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+/* ===== 成功メッセージ ===== */
+.success-message {
+  background-color: #e0ffe0;
+  color: #2e7d32;
+  padding: 10px 15px;
+  border: 1px solid #81c784;
+  border-radius: 6px;
+  margin-bottom: 20px;
+}
+
+/* ===== テーブルスタイル ===== */
+table {
+  width: 40%;
+  border-collapse: collapse;
+  background-color: #fff;
+  margin-top: 20px;
+  border: 1px solid #ccc;
+}
+
+table th, table td {
+  padding: 10px;
+  border: 1px solid #ddd;
+  text-align: center;
+}
+
+table th {
+  background-color: #f0f0f0;
+  font-weight: bold;
+}
+
+/* ===== 戻るリンク ===== */
+a {
+  display: inline-block;
+  color: #3498db;
+  text-decoration: none;
+  margin-top: 20px;
+  font-weight: bold;
+}
+
+a:hover {
+  text-decoration: underline;
+}

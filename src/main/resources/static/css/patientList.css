@@ -1,3 +1,4 @@
+/* ベースのフォントと背景、文字色 */
 body {
   font-family: 'Noto Sans JP', '游ゴシック', sans-serif;
   background-color: #f4f8fb;
@@ -6,6 +7,7 @@ body {
   color: #333;
 }
 
+/* 一覧のコンテナ */
 .list-container {
   max-width: 900px;
   margin: 50px auto;
@@ -15,6 +17,7 @@ body {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
+/* タイトル */
 h1 {
   font-size: 24px;
   color: #0077cc;
@@ -22,6 +25,7 @@ h1 {
   margin-bottom: 20px;
 }
 
+/* 成功メッセージ */
 .success-message {
   color: green;
   font-weight: bold;
@@ -29,47 +33,78 @@ h1 {
   margin-bottom: 20px;
 }
 
-/* テーブルデザイン */
+/* テーブル全体 */
 table {
   width: 100%;
   border-collapse: collapse;
+  table-layout: fixed; /* 幅のバランス調整 */
 }
 
+/* テーブルのヘッダーとセル */
 table th, table td {
   border: 1px solid #ddd;
   padding: 10px;
   text-align: center;
+  word-wrap: break-word; /* 長いテキストを折り返す */
 }
 
-table td:nth-child(2), /* 名前 */
-table th:nth-child(2) {
-  min-width: 150px;
+/* 名前の列幅確保 */
+table td:nth-child(1),
+table th:nth-child(1) {
+  min-width: 180px;
+  text-align: left; /* 名前は左寄せの方が読みやすい */
+  padding-left: 15px;
 }
 
-table td:nth-child(5), /* 備考 */
-table th:nth-child(5) {
-  min-width: 100px;
+/* 年齢・性別は狭めで良い */
+table td:nth-child(2), /* 年齢 */
+table th:nth-child(2),
+table td:nth-child(3), /* 性別 */
+table th:nth-child(3) {
+  width: 60px;
 }
 
-table td:nth-child(8), /* 備考 */
-table th:nth-child(8) {
+/* 病名はやや広め */
+table td:nth-child(1),
+table th:nth-child(1) {
+  min-width: 110px;
+  text-align: left;
+  padding-left: 10px;
+}
+
+/* 日付の列 */
+table td:nth-child(5),
+table th:nth-child(5),
+table td:nth-child(6),
+table th:nth-child(6) {
+  width: 110px;
+}
+
+/* 備考は最大限広めに */
+table td:nth-child(7),
+table th:nth-child(7) {
   min-width: 200px;
+  text-align: left;
+  padding-left: 10px;
 }
 
+/* ヘッダー背景色 */
 table th {
   background-color: #0077cc;
   color: #fff;
 }
 
+/* 偶数行の背景色 */
 table tr:nth-child(even) {
   background-color: #f9f9f9;
 }
 
+/* 行ホバー */
 table tr:hover {
   background-color: #eef5fb;
 }
 
-/* リンクデザイン */
+/* リンク */
 table a {
   color: #0077cc;
   text-decoration: none;
@@ -79,12 +114,13 @@ table a:hover {
   text-decoration: underline;
 }
 
-/* ボタンリンク */
+/* ナビゲーションリンク */
 .nav-links {
   margin-top: 20px;
   text-align: center;
 }
 
+/* ボタン */
 .button {
   display: inline-block;
   padding: 10px 20px;
@@ -95,6 +131,8 @@ table a:hover {
   font-size: 14px;
   margin: 0 10px;
   transition: background-color 0.3s, transform 0.2s;
+  cursor: pointer;
+  border: none;
 }
 
 .button:hover {

@@ -22,4 +22,5 @@ public interface RehabRecordRepository {
     // Mapで受け取る形に統一
     Double getMonthlyBarthelAverage(@Param("patientId") Long patientId,
         @Param("yearMonth") String yearMonth);
+
 }
