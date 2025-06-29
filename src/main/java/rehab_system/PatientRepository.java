@@ -1,4 +1,4 @@
-package rehab_system;  // 例
+package rehab_system;
 
 import java.util.List;
 import java.util.Map;

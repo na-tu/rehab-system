@@ -17,7 +17,7 @@ public class RehabRecordService {
   // 指定患者IDのリハビリ記録一覧を取得
   public List<RehabRecord> getRecordsByPatientId(Long patientId) {
     List<RehabRecord> records = rehabRecordRepository.findByPatientId(patientId);
-    // ★日付の降順（新しい日付が上）で並び替え
+    // 日付の降順（新しい日付が上）で並び替え
     records.sort((r1, r2) -> r2.getDate().compareTo(r1.getDate()));
 
     return records;
@@ -42,7 +42,7 @@ public class RehabRecordService {
   public RehabRecord getRecordById(Long id) {
     return rehabRecordRepository.findById(id);
   }
-  // 月ごとのBarthelIndex平均を取得（Map方式）
+  // 月ごとのBarthelIndex平均を取得
   public Double getMonthlyBarthelAverage(Long patientId, String yearMonth) {
     Map<String, Object> params = new HashMap<>();
     params.put("patientId", patientId);

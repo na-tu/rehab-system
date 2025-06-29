@@ -2,7 +2,6 @@ package rehab_system;
 
 import java.util.List;
 import lombok.Data;
-import java.time.LocalDate;
 import java.sql.Date;
 
 @Data

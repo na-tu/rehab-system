@@ -17,7 +17,8 @@
 
   <div class="action-links">
     <a th:href="@{/patients/{id}/edit(id=${patient.id})}" class="button">編集</a>
-    <a th:href="@{/patients/{id}/barthelIndex(id=${patient.id})}" class="button">Barthel Index月平均</a>
+    <a th:href="@{/patients/{id}/rehabRecord/barthelIndex(id=${patient.id})}" class="button">Barthel Index月平均</a>
+
     <form th:action="@{/patients/{id}/delete(id=${patient.id})}" method="post" style="display:inline;">
       <button type="submit" onclick="return confirm('本当に削除しますか？');" class="delete-button">患者情報全削除</button>
     </form>

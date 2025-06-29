@@ -11,7 +11,7 @@
 
 <!-- ★ ② 月別平均値表示 -->
 <h2>月ごとの平均を見る</h2>
-<form th:action="@{/patients/{id}/barthelIndex(id=${newRecord.patientId})}" method="get">
+<form th:action="@{/patients/{id}/rehabRecord/barthelIndex(id=${newRecord.patientId})}" method="get">
   <input type="month" name="yearMonth" th:value="${yearMonth}" required>
   <button type="submit">平均を表示</button>
 </form>

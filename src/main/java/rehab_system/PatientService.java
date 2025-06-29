@@ -16,11 +16,11 @@ public class PatientService {
   }
 
   // PatientDetailDTO を作成して返す
-  public PatientDetailDTO getPatientDetail(Long id) {
+  public Patient_RehabRecordsDTO getPatientDetail(Long id) {
     Patient patient = patientRepository.findPatientByIdForView(id); // 患者1人
     List<RehabRecord> records = rehabRecordService.getRecordsByPatientId(id); // リハビリ記録
 
-    PatientDetailDTO dto = new PatientDetailDTO();
+    Patient_RehabRecordsDTO dto = new Patient_RehabRecordsDTO();
     dto.setPatient(patient);
     dto.setRehabRecords(records);
 
