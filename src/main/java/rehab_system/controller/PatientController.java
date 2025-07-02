@@ -18,6 +18,9 @@ import rehab_system.data.RehabRecord;
 import rehab_system.service.PatientService;
 import rehab_system.service.RehabRecordService;
 
+/**
+ *患者情報のコントローラです。
+ */
 @Controller
 @RequestMapping("/patients")
 public class PatientController {
@@ -31,22 +34,35 @@ public class PatientController {
   @Autowired
   private RehabRecordService rehabRecordService;
 
-
-  // 日付がnullでも登録できるように設定
+  /**
+   *患者情報を登録する時に日付が空白（null）とし登録出来るように設定しています。
+   * "yyyy-MM-dd"形式の日付フォーマットを指定。
+   * @param binder：Webフォームの入力値をオブジェクトにバインドするためのバインダー
+   */
   @InitBinder
   public void initBinder(WebDataBinder binder) {
     SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-    dateFormat.setLenient(false);
+    dateFormat.setLenient(false);//厳密に指定した日付形式に従うよう設定。
     binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
   }
 
-  // 新規患者登録フォーム表示
+  /**
+   *新規患者登録フォームになります。
+   * @param model：新規患者情報をバインドします。
+   * @return：新規患者登録フォーム
+   */
   @GetMapping("/new")
   public String showRegistrationForm(Model model) {
     model.addAttribute("patient", new Patient());
     return "patient_new";
   }
 
+  /**
+   * 新規患者情報をフォームから受け取り、保存します。
+   * @param patient　患者情報をバインドし渡します。
+   * @param redirectAttributes　登録したらリダイレクト先に一時的なメッセージを渡します。
+   * @return　患者一覧画面へリダイレクト
+   */
   // 患者登録処理
   @PostMapping("/register")
   public String registerPatient(@ModelAttribute Patient patient, RedirectAttributes redirectAttributes) {

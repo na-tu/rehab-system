@@ -4,6 +4,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+/**
+ * トップページ表示のためのコントローラです。
+ *Modelで"message"をHTMLへ送ります。
+ */
 @Controller
 public class HomeController {
 
