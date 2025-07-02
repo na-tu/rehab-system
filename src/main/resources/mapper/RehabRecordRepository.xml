@@ -3,18 +3,18 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="rehab_system.RehabRecordRepository">
+<mapper namespace="rehab_system.repository.RehabRecordRepository">
 
-  <select id="findByPatientId" parameterType="long" resultType="rehab_system.RehabRecord">
+  <select id="findByPatientId" parameterType="long" resultType="rehab_system.data.RehabRecord">
     SELECT * FROM rehab_records WHERE patient_id = #{patientId}
   </select>
 
-  <insert id="insertRehabRecord" parameterType="rehab_system.RehabRecord" useGeneratedKeys="true" keyProperty="id">
+  <insert id="insertRehabRecord" parameterType="rehab_system.data.RehabRecord" useGeneratedKeys="true" keyProperty="id">
     INSERT INTO rehab_records(patient_id, date, content, barthel_index)
     VALUES (#{patientId}, #{date}, #{content}, #{barthelIndex})
   </insert>
 
-  <update id="updateRehabRecord" parameterType="rehab_system.RehabRecord">
+  <update id="updateRehabRecord" parameterType="rehab_system.data.RehabRecord">
     UPDATE rehab_records
     SET
     date = #{date},
@@ -35,7 +35,7 @@
     AND DATE_FORMAT(date, '%Y-%m') = #{yearMonth}
   </select>
 
-  <select id="findBarthelRecordsByPatientId" parameterType="long" resultType="rehab_system.RehabRecord">
+  <select id="findBarthelRecordsByPatientId" parameterType="long" resultType="rehab_system.data.RehabRecord">
     SELECT id, patient_id, date, barthel_index
     FROM rehab_records
     WHERE patient_id = #{patientId}

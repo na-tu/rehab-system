@@ -1,4 +1,4 @@
-package rehab_system;
+package rehab_system.data;
 
 import lombok.Data;
 import java.time.LocalDate;

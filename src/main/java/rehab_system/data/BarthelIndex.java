@@ -1,4 +1,4 @@
-package rehab_system;
+package rehab_system.data;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

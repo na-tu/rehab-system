@@ -1,10 +1,9 @@
-package rehab_system;
+package rehab_system.repository;
 
 import java.util.List;
-import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
+import rehab_system.data.RehabRecord;
 
 @Mapper
 public interface RehabRecordRepository {

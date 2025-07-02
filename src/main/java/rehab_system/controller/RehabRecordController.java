@@ -1,8 +1,7 @@
-package rehab_system;
+package rehab_system.controller;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,6 +9,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import rehab_system.data.BarthelIndex;
+import rehab_system.data.RehabRecord;
+import rehab_system.service.RehabRecordService;
 import rehab_system.dto.RehabRecordListWrapper;
 
 @Controller
@@ -23,7 +25,7 @@ public class RehabRecordController {
     this.rehabRecordService = rehabRecordService;
   }
 
-  // 新規追加
+  // 新規リハビリ記録の追加
   @PostMapping("/add")
   public String addRehabRecord(@PathVariable("id") Long id,
       @ModelAttribute RehabRecord rehabRecord,
@@ -34,7 +36,7 @@ public class RehabRecordController {
     return "redirect:/patients/" + id + "/edit";
   }
 
-  // 複数リハビリ記録更新
+  // リハビリ記録を複数個所の更新
   @PostMapping("/update")
   public String updateRehabRecord(@PathVariable("id") Long id,
       @ModelAttribute RehabRecordListWrapper wrapper,
@@ -47,7 +49,7 @@ public class RehabRecordController {
     return "redirect:/patients/" + id;
   }
 
-  // 削除処理
+  // リハビリ記録の削除処理
   @PostMapping("/{recordId}/delete")
   public String deleteRehabRecord(@PathVariable("id") Long id,
       @PathVariable Long recordId,

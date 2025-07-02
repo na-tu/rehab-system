@@ -1,8 +1,12 @@
-package rehab_system;
+package rehab_system.service;
 
 import java.util.List;
 import java.util.Map;
 import org.springframework.stereotype.Service;
+import rehab_system.data.Patient;
+import rehab_system.Patient_RehabRecordsDTO;
+import rehab_system.data.RehabRecord;
+import rehab_system.repository.PatientRepository;
 
 @Service
 public class PatientService {

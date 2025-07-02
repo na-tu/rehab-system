@@ -1,4 +1,4 @@
-package rehab_system;
+package rehab_system.controller;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -12,6 +12,11 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import rehab_system.data.Patient;
+import rehab_system.Patient_RehabRecordsDTO;
+import rehab_system.data.RehabRecord;
+import rehab_system.service.PatientService;
+import rehab_system.service.RehabRecordService;
 
 @Controller
 @RequestMapping("/patients")
@@ -35,7 +40,7 @@ public class PatientController {
     binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
   }
 
-  // 登録フォーム表示
+  // 新規患者登録フォーム表示
   @GetMapping("/new")
   public String showRegistrationForm(Model model) {
     model.addAttribute("patient", new Patient());
@@ -50,14 +55,14 @@ public class PatientController {
     return "redirect:/patients/list";
   }
 
-  // 一覧表示
+  // 患者一覧表示
   @GetMapping("/list")
   public String listPatients(Model model) {
     model.addAttribute("patients", patientService.getAllPatientsForView());
     return "patient_list";
   }
 
-  // 編集フォーム表示（患者情報＋リハビリ情報）
+  // 患者情報編集フォーム表示（患者情報＋リハビリ情報）
   @GetMapping("/{id}/edit")
   public String showEditForm(@PathVariable Long id, Model model) {
     Patient patient = patientService.getPatientForView(id);
@@ -73,7 +78,7 @@ public class PatientController {
 
     return "patient_update";
   }
-  // 患者更新処理
+  // 患者情報更新処理
   @GetMapping("/{id}")
   public String showPatientDetail(@PathVariable Long id, Model model) {
     Patient_RehabRecordsDTO detail = patientService.getPatientDetail(id);
@@ -91,7 +96,7 @@ public class PatientController {
     return "redirect:/patients/" + id;
   }
 
-  // 削除処理
+  // 患者情報削除処理
   @PostMapping("/{id}/delete")
   public String deletePatient(@PathVariable Long id, RedirectAttributes redirectAttributes) {
     patientService.deletePatient(id);

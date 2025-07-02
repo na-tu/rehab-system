@@ -1,4 +1,4 @@
-package rehab_system;
+package rehab_system.data;
 
 import java.util.List;
 import lombok.Data;

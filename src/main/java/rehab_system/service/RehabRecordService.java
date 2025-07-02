@@ -1,9 +1,11 @@
-package rehab_system;
+package rehab_system.service;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.springframework.stereotype.Service;
+import rehab_system.data.RehabRecord;
+import rehab_system.repository.RehabRecordRepository;
 
 @Service
 public class RehabRecordService {

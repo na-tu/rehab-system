@@ -1,16 +1,13 @@
 package rehab_system.dto;
 
 import java.util.List;
-import rehab_system.RehabRecord;
+import lombok.Getter;
+import lombok.Setter;
+import rehab_system.data.RehabRecord;
 
+@Setter
+@Getter
 public class RehabRecordListWrapper {
   private List<RehabRecord> rehabRecords;
 
-  public List<RehabRecord> getRehabRecords() {
-    return rehabRecords;
-  }
-
-  public void setRehabRecords(List<RehabRecord> rehabRecords) {
-    this.rehabRecords = rehabRecords;
-  }
 }
