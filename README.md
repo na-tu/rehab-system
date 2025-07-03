@@ -1,23 +1,18 @@
-# プロジェクト名
+# リハビリ管理システム
 
-このプロジェクトは〇〇を目的に作成されました。
+このアプリは患者のリハビリ記録を管理するWebアプリです。
 
-## 🚀 使用技術
-
-- Java 21
-- Spring Boot
-- MyBatis
-- Thymeleaf
-
-## 📦 機能一覧
+## 主な機能
 
 - 患者の登録・編集・削除
-- リハビリ記録の管理
-- Barthel Indexの記録と月別平均表示
+- リハビリ記録の追加・編集・削除
+- Barthel Indexの月別平均表示
 
-## 💻 起動方法（ローカル環境）
+## 使用技術
+
+- Java / Spring Boot / MyBatis / MySQL / Thymeleaf
+
+## 起動方法（ローカル）
 
 ```bash
-git clone https://github.com/ユーザー名/リポジトリ名.git
-cd リポジトリ名
 ./mvnw spring-boot:run
