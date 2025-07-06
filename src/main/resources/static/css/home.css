@@ -14,11 +14,10 @@ body {
   padding: 40px;
   background: #fff;
   border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 12px;
   text-align: center;
 }
 
-/* 見出し */
 h1 {
   font-size: 28px;
   color: #0077cc;
@@ -38,19 +37,3 @@ h3 {
   gap: 20px;
 }
 
-/* ボタン風リンク */
-.button {
-  display: inline-block;
-  padding: 12px 24px;
-  background-color: #0077cc;
-  color: white;
-  text-decoration: none;
-  border-radius: 8px;
-  transition: background-color 0.3s ease, transform 0.2s ease;
-  font-weight: bold;
-}
-
-.button:hover {
-  background-color: #005fa3;
-  transform: translateY(-2px);
-}
