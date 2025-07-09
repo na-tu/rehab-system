@@ -86,15 +86,15 @@ Barthel Indexの月ごとの平均値を自動で算出・表示することで�
 
 ## 📊 ER図
 
-![ER図](images/er_diagram.png)  
-※dbdiagram.ioやDrawSQLなどで作成した図をここに表示
+![ER図](images/rehab_system.ER図.png)  
+
 
 ---
 
-## 🖧 インフラ構成図
+## 🖧 ui_flow図
 
-![インフラ構成](images/infra_diagram.png)  
-例：ローカル → Spring Boot → MySQL（Docker環境なども可）
+![インフラ構成](images/rehab_system.ui_flow.png)  
+
 
 ---
 
