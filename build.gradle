@@ -57,3 +57,6 @@ dependencies {
 tasks.named('test') {
 	useJUnitPlatform()
 }
+bootJar {
+	archiveFileName = 'rehab-system-0.0.1-SNAPSHOT.jar'
+}
