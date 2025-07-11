@@ -1,1 +1,1 @@
-java -Dserver.port=$PORT -jar target/rehab-system.jar
+web: java -Dserver.port=$PORT -Dspring.profiles.active=heroku -jar target/rehab-system.jar
