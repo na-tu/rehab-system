@@ -1,6 +1,6 @@
 plugins {
 	id 'java'
-	id 'war'
+	//id 'war'
 	id 'org.springframework.boot' version '3.5.0'
 	id 'io.spring.dependency-management' version '1.1.7'
 }
@@ -24,13 +24,13 @@ repositories {
 }
 
 dependencies {
-	//Spring web（WebアプリやREST APIを作るための基本機能・必須）
+	//Spring web（WebアプリやREST APIを作るため）
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 
 	//Thymeleaf	(HTMLを表示するテンプレートエンジン。Web画面を作る場合)
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 
-    // Lombok（任意）
+    // Lombok
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
 
@@ -42,7 +42,8 @@ dependencies {
 	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.3'
 
 
-	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
+	//providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
+	implementation 'org.springframework.boot:spring-boot-starter-tomcat'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.mockito:mockito-inline:5.2.0'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
