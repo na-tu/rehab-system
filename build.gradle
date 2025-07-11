@@ -60,3 +60,11 @@ tasks.named('test') {
 bootJar {
 	archiveFileName = 'rehab-system-0.0.1-SNAPSHOT.jar'
 }
+sourceSets {
+	main {
+		resources {
+			srcDirs = ['src/main/resources']
+			includes = ['mapper/**/*.xml']
+		}
+	}
+}
