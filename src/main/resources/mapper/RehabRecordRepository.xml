@@ -23,9 +23,12 @@
     WHERE id = #{id}
   </update>
 
-
   <delete id="deleteRehabRecord" parameterType="long">
     DELETE FROM rehab_records WHERE id = #{id}
+  </delete>
+
+  <delete id="deleteByPatientId" parameterType="long">
+    DELETE FROM rehab_records WHERE patient_id = #{patientId}
   </delete>
 
   <select id="getMonthlyBarthelAverage" parameterType="map" resultType="double">

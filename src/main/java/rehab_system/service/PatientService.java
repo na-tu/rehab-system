@@ -70,6 +70,7 @@ public class PatientService {
 
   // 削除
   public void deletePatient(Long id) {
+    rehabRecordService.deleteByPatientId(id);
     patientRepository.deletePatient(id);
   }
 }

@@ -16,6 +16,7 @@ public interface RehabRecordRepository {
 
   // 追加：削除用
   void deleteRehabRecord(@Param("id") Long id);
+  void deleteByPatientId(Long patientId);
 
   RehabRecord findById(Long id);
     // Mapで受け取る形に統一

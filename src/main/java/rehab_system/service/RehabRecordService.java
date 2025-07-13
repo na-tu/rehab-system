@@ -36,6 +36,9 @@ public class RehabRecordService {
   }
 
   // 削除
+  public void deleteByPatientId(Long patientId) {
+    rehabRecordRepository.deleteByPatientId(patientId);
+  }
   public void deleteRehabRecord(Long id) {
     rehabRecordRepository.deleteRehabRecord(id);
   }
